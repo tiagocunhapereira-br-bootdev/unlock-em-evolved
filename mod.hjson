@@ -1,0 +1,6 @@
+name: "unlock-em-evolved"
+displayName: "Unlock Em' EVOLVED"
+author: "Tiago, Google Gemini & Microsoft Copilot"
+description: "Unlocks ALL blocks including Sandbox tools, and unlocks ALL units."
+version: "3.0"
+minGameVersion: "146"
