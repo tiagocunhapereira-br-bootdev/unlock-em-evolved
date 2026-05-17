@@ -1,21 +1,53 @@
+// scripts/main.js
+
+// Runs on the client
 Events.on(ClientLoadEvent, e => {
     Vars.content.blocks().each(block => {
-        if (block != null && block.requirements != null) {
+        if (block && block.requirements) {
             block.alwaysUnlocked = true;
             block.buildVisibility = BuildVisibility.shown;
-            
-            try {
-                block.requirements = ItemStack.with();
-                if ("buildCost" in block) block.buildCost = 0;
-                
-                if ("envEnabled" in block) block.envEnabled = -1;
-            } catch(err) {}
+            block.requirements = ItemStack.empty;
+
+            // Only set if the property exists
+            if (typeof block.buildCost !== "undefined") {
+                block.buildCost = 0;
+            }
+
+            if (typeof block.envEnabled !== "undefined") {
+                block.envEnabled = -1;
+            }
         }
     });
 
     Vars.content.units().each(unit => {
-        if(unit != null) unit.alwaysUnlocked = true;
+        if (unit) unit.alwaysUnlocked = true;
     });
 
-    Log.info("Unlock Em' EVOLVED: The Tech-Bridge is live. Author: Tiago, Gemini & Copilot");
+    Log.info("Unlock Em' EVOLVED: Client patch applied safely.");
+});
+
+// Runs on the server
+Events.on(ContentInitEvent, e => {
+    Vars.content.blocks().each(block => {
+        if (block && block.requirements) {
+            block.alwaysUnlocked = true;
+            block.buildVisibility = BuildVisibility.shown;
+            block.requirements = ItemStack.empty;
+
+            // Only set if the property exists
+            if (typeof block.buildCost !== "undefined") {
+                block.buildCost = 0;
+            }
+
+            if (typeof block.envEnabled !== "undefined") {
+                block.envEnabled = -1;
+            }
+        }
+    });
+
+    Vars.content.units().each(unit => {
+        if (unit) unit.alwaysUnlocked = true;
+    });
+
+    Log.info("Unlock Em' EVOLVED: Server patch applied safely.");
 });
